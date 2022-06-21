@@ -12,6 +12,7 @@
                             <h5 class="card-title">{{ note.title }}</h5>
                             <p class="card-text">{{ note.content }}</p>
                             <a href="{{ path('note_edit', { 'id': note.id }) }}" class="edit-link">Edit</a>
+                            <a href="{{ path('note_delete', { 'id': note.id }) }}" class="delete-link">Delete</a>
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">Created at: {{ note.createdAt | date }}</small>
@@ -22,5 +23,3 @@
         </div>
     </div>
 {% endblock %}
-
-

@@ -60,4 +60,19 @@ class NoteController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'note_delete')]
+    public function delete(int $id, ManagerRegistry $registry): Response
+    {
+        $note = $registry->getRepository(Note::class)->find($id);
+        if (!$note) {
+            throw $this->createNotFoundException(
+                'Note with id: ' . $id . ' has not  been found'
+            );
+        }
+        $registry->getManager()->remove($note);
+        $registry->getManager()->flush();
+
+        return $this->redirectToRoute('main_index');
+    }
 }

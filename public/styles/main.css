@@ -1,11 +1,17 @@
 @media (min-width: 1200px) {
     .container {
-        max-width: 50%;
+        max-width: 60%;
     }
 }
 
 header {
-    margin-top: 5rem;
+    margin-top: 4rem;
+}
+
+@media (max-width: 776px) {
+    header {
+        margin-top: 1em;
+    }
 }
 
 nav {
@@ -14,6 +20,11 @@ nav {
     background-color: #525252 !important;
 }
 
-.edit-link {
+.edit-link, .edit-link:hover {
     color: #e0b819;
+}
+
+.delete-link, .delete-link:hover {
+    color: #cf2525;
+    margin-left: 4px;
 }
