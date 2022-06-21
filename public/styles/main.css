@@ -13,3 +13,7 @@ nav {
     margin-bottom: 16px;
     background-color: #525252 !important;
 }
+
+.edit-link {
+    color: #e0b819;
+}
