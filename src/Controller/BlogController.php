@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Form\NoteType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,15 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/blog')]
 class BlogController extends AbstractController
 {
-    #[Route('/add')]
-    public function add(Request $request): Response
+    #[Route('/add', name: 'note_add')]
+    public function add(Request $request, ManagerRegistry $registry): Response
     {
         $note = new Note();
         $form = $this->createForm(NoteType::class, $note);
 
-        if ($request->isMethod('POST')) {
-            // form validation and so on
-            return new Response();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note = $form->getData();
+            $note->setCreatedAt(new \DateTime());
+
+            $registry->getManager()->persist($note);
+            $registry->getManager()->flush();
+
+            return $this->redirectToRoute('main_index');
         }
 
         return $this->render('blog/add.html.twig', [
