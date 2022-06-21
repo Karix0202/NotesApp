@@ -1,0 +1,14 @@
+@media (min-width: 1200px) {
+    .container {
+        max-width: 50%;
+    }
+}
+
+header {
+    margin-top: 5rem;
+}
+
+nav {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
