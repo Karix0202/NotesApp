@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/blog')]
-class BlogController extends AbstractController
+class NoteController extends AbstractController
 {
     #[Route('/add', name: 'note_add')]
     public function add(Request $request, ManagerRegistry $registry): Response
@@ -30,7 +30,7 @@ class BlogController extends AbstractController
             return $this->redirectToRoute('main_index');
         }
 
-        return $this->render('blog/add.html.twig', [
+        return $this->render('note-form.html.twig', [
             'form' => $form->createView()
         ]);
     }
