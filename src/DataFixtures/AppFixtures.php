@@ -24,8 +24,7 @@ class AppFixtures extends Fixture
 
     public function loadNotes(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; $i++)
-        {
+        for ($i = 0; $i < 10; $i++) {
             $note = new Note();
             $note
                 ->setTitle($this->faker->realText(20))

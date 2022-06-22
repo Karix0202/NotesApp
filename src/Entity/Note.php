@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\NoteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: NoteRepository::class)]
 class Note
@@ -14,9 +16,13 @@ class Note
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[NotBlank]
+    #[Length(min: 3)]
     private $title;
 
     #[ORM\Column(type: 'text')]
+    #[NotBlank]
+    #[Length(min: 20)]
     private $content;
 
     #[ORM\Column(type: 'datetime')]

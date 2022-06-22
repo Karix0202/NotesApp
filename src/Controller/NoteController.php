@@ -61,7 +61,7 @@ class NoteController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'note_delete')]
+    #[Route('/delete/{id}', name: 'note_delete', requirements: ['id' => '\d+'])]
     public function delete(int $id, ManagerRegistry $registry): Response
     {
         $note = $registry->getRepository(Note::class)->find($id);
@@ -70,6 +70,7 @@ class NoteController extends AbstractController
                 'Note with id: ' . $id . ' has not  been found'
             );
         }
+
         $registry->getManager()->remove($note);
         $registry->getManager()->flush();
 
