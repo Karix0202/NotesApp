@@ -68,4 +68,11 @@ class Note
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return '1';
+    }
+
+
 }

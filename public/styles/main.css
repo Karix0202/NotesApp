@@ -28,3 +28,19 @@ nav {
     color: #cf2525;
     margin-left: 4px;
 }
+
+.search-form {
+    float: right;
+}
+
+.nav-search-bar > .mb-3 {
+    margin: 0 !important;
+}
+
+.nav-search-bar > .mb-3 > label {
+    display: none;
+}
+
+.nav-search-bar > .mb-3 > button {
+    margin-left: 8px;
+}

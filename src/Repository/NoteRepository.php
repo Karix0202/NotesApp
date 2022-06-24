@@ -39,6 +39,15 @@ class NoteRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByTitle(string $title): array
+    {
+        return $this->createQueryBuilder('n')
+            ->andWhere('n.title LIKE :title')
+            ->setParameter('title', '%' . $title . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Note[] Returns an array of Note objects
 //     */

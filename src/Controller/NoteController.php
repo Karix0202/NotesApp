@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Form\NoteType;
+use App\Form\SearchNoteType;
 use App\Repository\NoteRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,5 +76,16 @@ class NoteController extends AbstractController
         $registry->getManager()->flush();
 
         return $this->redirectToRoute('main_index');
+    }
+
+    #[Route('/search', name: 'note_search', methods: ['POST'])]
+    public function search(Request $request, ManagerRegistry $registry): Response
+    {
+        // TODO: validation
+        $notes = $registry->getRepository(Note::class)->searchByTitle($request->get('search_note')['title']);
+
+        return $this->render('main/index.html.twig', [
+            'notes' => $notes
+        ]);
     }
 }
