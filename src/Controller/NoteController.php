@@ -32,7 +32,7 @@ class NoteController extends AbstractController
             return $this->redirectToRoute('main_index');
         }
 
-        return $this->render('note/note-form.html.twig', [
+        return $this->render('note/note_form.html.twig', [
             'form' => $form->createView()
         ]);
     }
