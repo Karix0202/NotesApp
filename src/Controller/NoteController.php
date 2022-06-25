@@ -80,7 +80,7 @@ class NoteController extends AbstractController
     #[Route('/search', name: 'note_search', methods: ['GET'])]
     public function search(Request $request, ManagerRegistry $registry): Response
     {
-        return $this->render('main/index.html.twig', [
+        return $this->render('note/search_result.html.twig', [
             'notes' => $registry->getRepository(Note::class)->searchByTitle($request->query->get('title'))
         ]);
     }

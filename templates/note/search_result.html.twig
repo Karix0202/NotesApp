@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search results | NotesApp{% endblock %}
+
+{% block container %}
+    {% if notes | length > 0 %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for note in notes %}
+                <div class="col">
+                    {{ include('note/note_card.html.twig', {note: note}) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>None</h2>
+    {% endif %}
+{% endblock %}

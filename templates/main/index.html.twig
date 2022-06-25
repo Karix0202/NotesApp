@@ -3,23 +3,11 @@
 {% block title %}NotesApp{% endblock %}
 
 {% block container %}
-    <div class="accordion" id="accordion">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for note in notes %}
-                <div class="col">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ note.title }}</h5>
-                            <p class="card-text">{{ note.content }}</p>
-                            <a href="{{ path('note_edit', { 'id': note.id }) }}" class="edit-link">Edit</a>
-                            <a href="{{ path('note_delete', { 'id': note.id }) }}" class="delete-link">Delete</a>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Created at: {{ note.createdAt | date }}</small>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for note in notes %}
+            <div class="col">
+                {{ include('note/note_card.html.twig', {note: note}) }}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
