@@ -43,6 +43,7 @@ class NoteRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('n')
             ->andWhere('n.title LIKE :title')
+            ->orWhere('n.content LIKE :title')
             ->setParameter('title', '%' . $title . '%')
             ->getQuery()
             ->getResult();
