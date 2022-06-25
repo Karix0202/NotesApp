@@ -51,13 +51,12 @@ class NoteController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $note = $form->getData();
             $registry->getManager()->flush();
 
             return $this->redirectToRoute('main_index');
         }
 
-        return $this->render('note/note-form.html.twig', [
+        return $this->render('note/note_form.html.twig', [
             'form' => $form->createView()
         ]);
     }

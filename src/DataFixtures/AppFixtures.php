@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Note;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -29,7 +30,7 @@ class AppFixtures extends Fixture
             $note
                 ->setTitle($this->faker->realText(20))
                 ->setContent($this->faker->realText(120))
-                ->setCreatedAt(new \DateTime())
+                ->setCreatedAt(new DateTime())
             ;
 
             $manager->persist($note);

@@ -50,9 +50,9 @@ nav {
     margin-right: 4px;
     padding-left: 6px;
     padding-right: 6px;
+    text-decoration: underline;
 }
 
-.note-delete-btn {
+.note-delete-btn, .note-delete-btn:hover {
     color: #cf2525;
-    text-decoration: underline;
 }
