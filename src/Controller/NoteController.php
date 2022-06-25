@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 #[Route('/note')]
 class NoteController extends AbstractController
@@ -62,8 +63,12 @@ class NoteController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'note_delete', requirements: ['id' => '\d+'])]
-    public function delete(int $id, ManagerRegistry $registry): Response
+    public function delete(Request $request, int $id, ManagerRegistry $registry): Response
     {
+        if (!$this->isCsrfTokenValid('delete-note', $request->request->get('token'))) {
+            throw new InvalidCsrfTokenException('Invalid CSRF token!');
+        }
+
         $note = $registry->getRepository(Note::class)->find($id);
         if (!$note) {
             throw $this->createNotFoundException(
@@ -77,7 +82,7 @@ class NoteController extends AbstractController
         return $this->redirectToRoute('main_index');
     }
 
-    #[Route('/search', name: 'note_search', methods: ['GET'])]
+    #[Route('/search', name: 'note_search')]
     public function search(Request $request, ManagerRegistry $registry): Response
     {
         return $this->render('note/search_result.html.twig', [

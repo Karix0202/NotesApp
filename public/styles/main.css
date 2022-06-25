@@ -44,3 +44,15 @@ nav {
 .nav-search-bar > .mb-3 > button {
     margin-left: 8px;
 }
+
+.note-card-btn {
+    float: left;
+    margin-right: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.note-delete-btn {
+    color: #cf2525;
+    text-decoration: underline;
+}

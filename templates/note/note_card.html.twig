@@ -2,8 +2,11 @@
     <div class="card-body">
         <h5 class="card-title">{{ note.title }}</h5>
         <p class="card-text">{{ note.content }}</p>
-        <a href="{{ path('note_edit', { 'id': note.id }) }}" class="edit-link">Edit</a>
-        <a href="{{ path('note_delete', { 'id': note.id }) }}" class="delete-link">Delete</a>
+        <a href="{{ path('note_edit', { 'id': note.id }) }}" class="btn note-card-btn edit-link">Edit</a>
+        <form action="{{ path('note_delete', {'id': note.id}) }}" method="post">
+            <input type="hidden" name="token" value="{{ csrf_token('delete-note') }}">
+            <button type="submit" class="btn note-delete-btn note-card-btn">Delete</button>
+        </form>
     </div>
     <div class="card-footer">
         <small class="text-muted">Created at: {{ note.createdAt | date }}</small>
