@@ -23,6 +23,7 @@ class NoteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Note::class,
+            'csrf_protection' => true,
         ]);
     }
 }

@@ -30,7 +30,8 @@ class SearchNoteType extends AbstractType
             'data_class' => Note::class,
             'attr' => [
                 'class' => 'd-flex search-form nav-search-bar'
-            ]
+            ],
+            'csrf_protection' => true,
         ]);
     }
 }
