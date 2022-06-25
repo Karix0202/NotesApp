@@ -28,6 +28,10 @@ class Note
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    #[ORM\Column(type: 'text')]
+    #[NotBlank]
+    private $color;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,10 +73,15 @@ class Note
         return $this;
     }
 
-    public function __toString(): string
+    public function getColor(): ?string
     {
-        return '1';
+        return $this->color;
     }
 
+    public function setColor($color): self
+    {
+        $this->color = $color;
 
+        return $this;
+    }
 }

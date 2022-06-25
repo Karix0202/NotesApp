@@ -56,3 +56,19 @@ nav {
 .note-delete-btn, .note-delete-btn:hover {
     color: #cf2525;
 }
+
+.yellow-card {
+    background-color: #faf8c8;
+}
+
+.green-card {
+    background-color: #c2fcc8;
+}
+
+.blue-card {
+    background-color: #bdd7ff;
+}
+
+.red-card {
+    background-color: #fcc2c2;
+}

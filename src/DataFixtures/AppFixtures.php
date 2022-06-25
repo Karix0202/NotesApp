@@ -25,12 +25,14 @@ class AppFixtures extends Fixture
 
     public function loadNotes(ObjectManager $manager): void
     {
+        $colors = ['default', 'green', 'yellow', 'blue', 'red'];
         for ($i = 0; $i < 10; $i++) {
             $note = new Note();
             $note
                 ->setTitle($this->faker->realText(20))
                 ->setContent($this->faker->realText(120))
                 ->setCreatedAt(new DateTime())
+                ->setColor($colors[rand(0, count($colors) - 1)])
             ;
 
             $manager->persist($note);
