@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Note;
 use App\Form\NoteType;
-use App\Form\SearchNoteType;
-use App\Repository\NoteRepository;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +23,7 @@ class NoteController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $note = $form->getData();
-            $note->setCreatedAt(new \DateTime());
+            $note->setCreatedAt(new DateTime());
 
             $registry->getManager()->persist($note);
             $registry->getManager()->flush();
@@ -78,14 +77,11 @@ class NoteController extends AbstractController
         return $this->redirectToRoute('main_index');
     }
 
-    #[Route('/search', name: 'note_search', methods: ['POST'])]
+    #[Route('/search', name: 'note_search', methods: ['GET'])]
     public function search(Request $request, ManagerRegistry $registry): Response
     {
-        // TODO: validation
-        $notes = $registry->getRepository(Note::class)->searchByTitle($request->get('search_note')['title']);
-
         return $this->render('main/index.html.twig', [
-            'notes' => $notes
+            'notes' => $registry->getRepository(Note::class)->searchByTitle($request->query->get('title'))
         ]);
     }
 }

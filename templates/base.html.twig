@@ -20,9 +20,7 @@
     <body>
         {% block body %}{% endblock %}
 
-        {{ render(controller(
-            'App\\Controller\\MainController::header'
-        )) }}
+        {{ include('header.html.twig') }}
 
         <div class="container">
             {% block container %}{% endblock %}
