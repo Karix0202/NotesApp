@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\NoteRepository;
+use App\Validator\Color;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -30,6 +31,7 @@ class Note
 
     #[ORM\Column(type: 'text')]
     #[NotBlank]
+    #[Color]
     private $color;
 
     public function getId(): ?int

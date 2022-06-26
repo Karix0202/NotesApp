@@ -72,3 +72,7 @@ nav {
 .red-card {
     background-color: #fcc2c2;
 }
+
+.container {
+    margin-bottom: 4rem;
+}
