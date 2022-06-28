@@ -14,7 +14,9 @@ class MainController extends AbstractController
     public function index(NoteRepository $noteRepository): Response
     {
         return $this->render('main/index.html.twig', [
-            'notes' => $noteRepository->findAll()
+            'notes' => $noteRepository->findBy([], [
+                'id' => 'DESC'
+            ])
         ]);
     }
 }

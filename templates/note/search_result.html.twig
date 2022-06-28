@@ -3,7 +3,8 @@
 {% block title %}Search results | NotesApp{% endblock %}
 
 {% block container %}
-    {% if notes | length > 0 %}
+    {{ error }}
+    {% if notes and error == 0 %}
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for note in notes %}
                 <div class="col">
@@ -11,7 +12,9 @@
                 </div>
             {% endfor %}
         </div>
+    {% elseif error == 0 %}
+        <h2>No results</h2>
     {% else %}
-        <h2>None</h2>
+        <h2>Something went wrong...</h2>
     {% endif %}
 {% endblock %}

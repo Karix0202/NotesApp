@@ -39,14 +39,19 @@ class NoteRepository extends ServiceEntityRepository
         }
     }
 
-    public function searchByTitle(string $title): array
+    public function searchByPhrase(string $phrase, bool $ascending = true): array
     {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.title LIKE :title')
-            ->orWhere('n.content LIKE :title')
-            ->setParameter('title', '%' . $title . '%')
-            ->getQuery()
-            ->getResult();
+        $queryBuilder = $this->createQueryBuilder('n')
+                            ->where('n.title LIKE :phrase')
+                            ->orWhere('n.content LIKE :phrase')
+                            ->setParameter('phrase', '%' . $phrase . '%')
+        ;
+
+        if (!$ascending) {
+            $queryBuilder->orderBy('n.id', 'DESC');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
 //    /**
