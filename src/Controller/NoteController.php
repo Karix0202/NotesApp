@@ -78,6 +78,10 @@ class NoteController extends AbstractController
         $registry->getManager()->remove($note);
         $registry->getManager()->flush();
 
+        if ($request->request->get('redirect_to')) {
+            return $this->redirect($request->request->get('redirect_to'));
+        }
+
         return $this->redirectToRoute('main_index');
     }
 
