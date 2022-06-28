@@ -21,7 +21,7 @@ nav {
 }
 
 .edit-link, .edit-link:hover {
-    color: #e0b819;
+    color: #ffb01c;
 }
 
 .delete-link, .delete-link:hover {
@@ -73,6 +73,10 @@ nav {
     background-color: #fcc2c2;
 }
 
-.container {
+.main-container {
     margin-bottom: 4rem;
+}
+
+button:focus {
+    outline: 0 !important;
 }
