@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Folder;
 use App\Entity\Note;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,6 +12,9 @@ use Faker\Generator;
 
 class AppFixtures extends Fixture
 {
+    private const FOLDER_NUM = 5;
+    private const NOTE_NUM_PER_FOLDER = 5;
+
     public Generator $faker;
 
     public function __construct()
@@ -20,22 +24,27 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $this->loadNotes($manager);
-    }
-
-    public function loadNotes(ObjectManager $manager): void
-    {
         $colors = ['default', 'green', 'yellow', 'blue', 'red'];
-        for ($i = 0; $i < 20; $i++) {
-            $note = new Note();
-            $note
-                ->setTitle($this->faker->realText(20))
-                ->setContent($this->faker->realText(120))
-                ->setCreatedAt(new DateTime())
-                ->setColor($colors[rand(0, count($colors) - 1)])
-            ;
 
-            $manager->persist($note);
+        for ($i = 0; $i < self::FOLDER_NUM; $i++) {
+            $folder = new Folder();
+            $folder
+                ->setName($this->faker->realText(20))
+            ;
+            $manager->persist($folder);
+
+            for ($j = 0; $j < self::NOTE_NUM_PER_FOLDER; $j++) {
+                $note = new Note();
+                $note
+                    ->setTitle($this->faker->realText(20))
+                    ->setContent($this->faker->realText(120))
+                    ->setCreatedAt(new DateTime())
+                    ->setColor($colors[rand(0, count($colors) - 1)])
+                    ->setFolder($folder)
+                ;
+
+                $manager->persist($note);
+            }
         }
 
         $manager->flush();
