@@ -25,6 +25,7 @@ class FolderType extends AbstractType
             'attr' => [
                 'class' => 'add-form'
             ],
+            'csrf_protection' => true,
         ]);
     }
 }
