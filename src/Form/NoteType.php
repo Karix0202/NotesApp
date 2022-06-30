@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Folder;
 use App\Entity\Note;
+use App\Repository\FolderRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,6 +19,14 @@ class NoteType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
+            ->add('folder', EntityType::class, [
+                'class' => Folder::class,
+                'query_builder' => function (FolderRepository $folderRepository) {
+                    return $folderRepository->createQueryBuilder('f')
+                        ->orderBy('f.id', 'DESC')
+                    ;
+                }
+            ])
             ->add('color', ChoiceType::class, [
                 'choices' => [
                     'default' => 'default',
