@@ -85,3 +85,16 @@ button:focus {
     width: 80%;
     margin: 16px auto 0;
 }
+
+.folder-separator {
+    width: 100%;
+    margin: 4px 0;
+    border-radius: 4px;
+    background-color: #c7c7c7;
+    padding: 0;
+}
+
+.folder-separator p {
+    margin-left: 16px;
+    padding: 12px 0 !important;
+}
