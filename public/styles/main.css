@@ -94,7 +94,12 @@ button:focus {
     padding: 0;
 }
 
-.folder-separator p {
+.folder-name {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.folder-name p {
     margin-left: 16px;
     padding: 12px 0 !important;
 }

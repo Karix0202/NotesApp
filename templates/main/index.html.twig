@@ -5,7 +5,9 @@
 {% block container %}
     {% for folder in folders %}
         <div class="folder-separator">
-            <p>Folder: {{ folder.name }}</p>
+            <div class="folder-name">
+                <p>Folder: {{ folder.name }}</p>
+            </div>
         </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for note in folder.notes | reverse %}
