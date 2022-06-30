@@ -15,6 +15,9 @@ class Folder
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
+
     #[ORM\OneToMany(mappedBy: 'folder', targetEntity: Note::class)]
     private $notes;
 
@@ -26,6 +29,16 @@ class Folder
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name): void
+    {
+        $this->name = $name;
     }
 
     public function getNotes(): Collection
