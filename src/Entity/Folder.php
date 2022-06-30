@@ -18,6 +18,9 @@ class Folder
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
     #[ORM\OneToMany(mappedBy: 'folder', targetEntity: Note::class)]
     private $notes;
 
@@ -44,6 +47,18 @@ class Folder
     public function getNotes(): Collection
     {
         return $this->notes;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     public function addNote(Note $note): self
