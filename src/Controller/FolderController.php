@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Folder;
 use App\Form\FolderType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,10 +14,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class FolderController extends AbstractController
 {
     #[Route('/add', name: 'add')]
-    public function add(): Response
+    public function add(Request $request, ManagerRegistry $registry): Response
     {
         $folder = new Folder();
         $form = $this->createForm(FolderType::class, $folder);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registry->getManager()->persist($folder);
+            $registry->getManager()->flush();
+
+            return $this->redirectToRoute('main_index');
+        }
 
         return $this->render('folder/add.html.twig', [
             'form' => $form->createView(),
