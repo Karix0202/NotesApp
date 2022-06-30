@@ -72,7 +72,7 @@ class NoteController extends AbstractController
         $note = $registry->getRepository(Note::class)->find($id);
         if (!$note) {
             throw $this->createNotFoundException(
-                'Note with id: ' . $id . ' has not  been found'
+                'Note with id: ' . $id . ' has not been found'
             );
         }
 

@@ -3,7 +3,6 @@
 {% block title %}Search results | NotesApp{% endblock %}
 
 {% block container %}
-    {{ error }}
     {% if notes and error == 0 %}
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for note in notes %}
