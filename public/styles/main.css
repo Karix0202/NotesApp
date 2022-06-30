@@ -80,3 +80,8 @@ nav {
 button:focus {
     outline: 0 !important;
 }
+
+.add-form {
+    width: 80%;
+    margin: 16px auto 0;
+}
