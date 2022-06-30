@@ -34,6 +34,10 @@ class Note
     #[Color]
     private $color;
 
+    #[ORM\ManyToOne(targetEntity: Folder::class, inversedBy: 'notes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $folder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,6 +87,18 @@ class Note
     public function setColor($color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getFolder(): ?Folder
+    {
+        return $this->folder;
+    }
+
+    public function setFolder(?Folder $folder): self
+    {
+        $this->folder = $folder;
 
         return $this;
     }
