@@ -21,7 +21,7 @@ class Folder
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\OneToMany(mappedBy: 'folder', targetEntity: Note::class)]
+    #[ORM\OneToMany(mappedBy: 'folder', targetEntity: Note::class, cascade: ['remove'])]
     private $notes;
 
     public function __construct()
@@ -39,9 +39,11 @@ class Folder
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName($name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getNotes(): Collection

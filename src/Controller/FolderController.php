@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 #[Route('/folder', name: 'folder_')]
 class FolderController extends AbstractController
@@ -30,6 +31,7 @@ class FolderController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $folder->setCreatedAt(new \DateTime());
             $registry->getManager()->persist($folder);
             $registry->getManager()->flush();
 
@@ -39,5 +41,26 @@ class FolderController extends AbstractController
         return $this->render('folder/add.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(Request $request, int $id, FolderRepository $folderRepository): Response
+    {
+        if (!$this->isCsrfTokenValid('delete-folder', $request->request->get('token'))) {
+            throw new InvalidCsrfTokenException(
+                'Invalid CSRF token!'
+            );
+        }
+
+        $folder = $folderRepository->find($id);
+        if (!$folder) {
+            throw $this->createNotFoundException(
+                'Folder with id: ' . $id . ' has not been found!'
+            );
+        }
+
+        $folderRepository->remove($folder, true);
+
+        return $this->redirectToRoute('folder_index');
     }
 }

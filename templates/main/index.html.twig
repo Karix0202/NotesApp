@@ -4,18 +4,20 @@
 
 {% block container %}
     {% for folder in folders %}
-        <div class="folder-separator">
-            <div class="folder-name">
-                <p>Folder: {{ folder.name }}</p>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for note in folder.notes | reverse %}
-                <div class="col">
-                    {{ include('note/note_card.html.twig', {note: note}) }}
+        {% if folder.notes | length > 0 %}
+            <div class="folder-separator">
+                <div class="folder-name">
+                    <p>Folder: {{ folder.name }}</p>
                 </div>
-            {% endfor %}
-        </div>
-        <hr style="width: 100%"/>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for note in folder.notes | reverse %}
+                    <div class="col">
+                        {{ include('note/note_card.html.twig', {note: note}) }}
+                    </div>
+                {% endfor %}
+            </div>
+            <hr style="width: 100%"/>
+        {% endif %}
     {% endfor %}
 {% endblock %}

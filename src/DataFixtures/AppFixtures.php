@@ -30,6 +30,7 @@ class AppFixtures extends Fixture
             $folder = new Folder();
             $folder
                 ->setName($this->faker->realText(20))
+                ->setCreatedAt(new DateTime())
             ;
             $manager->persist($folder);
 

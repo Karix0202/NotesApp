@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Repository\FolderRepository;
 use App\Repository\NoteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 #[Route('/')]
 class MainController extends AbstractController
