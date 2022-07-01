@@ -48,7 +48,9 @@ class NoteController extends AbstractController
             );
         }
 
-        $form = $this->createForm(NoteType::class, $note);
+        $form = $this->createForm(NoteType::class, $note, [
+            'submit_button_text' => 'save',
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -36,7 +36,7 @@ class NoteType extends AbstractType
                     'red' => 'red'
                 ]
             ])
-            ->add('add', SubmitType::class)
+            ->add($options['submit_button_text'], SubmitType::class)
         ;
     }
 
@@ -45,6 +45,7 @@ class NoteType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Note::class,
             'csrf_protection' => true,
+            'submit_button_text' => 'add'
         ]);
     }
 }
