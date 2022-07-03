@@ -14,7 +14,7 @@ class FolderType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('add', SubmitType::class)
+            ->add($options['submit_button_text'], SubmitType::class)
         ;
     }
 
@@ -26,6 +26,7 @@ class FolderType extends AbstractType
                 'class' => 'add-form'
             ],
             'csrf_protection' => true,
+            'submit_button_text' => 'add',
         ]);
     }
 }

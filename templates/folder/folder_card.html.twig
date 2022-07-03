@@ -1,8 +1,8 @@
 <div class="card h-100">
     <div class="card-body">
         <h5 class="card-title">{{ folder.name }}</h5>
-{#        <a href="" class="btn note-card-btn edit-link">Edit</a>#}
         <p class="card-text">Number of notes: {{ folder.notes() | length }}</p>
+        <a href="{{ path('folder_edit', {'id': folder.id}) }}" class="btn note-card-btn edit-link">Edit</a>
         <form action="{{ path('folder_delete', {'id': folder.id}) }}" method="post">
             <input type="hidden" name="token" value="{{ csrf_token('delete-folder') }}">
             <button type="submit" class="btn note-delete-btn note-card-btn">Delete</button>

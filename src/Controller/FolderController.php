@@ -63,4 +63,31 @@ class FolderController extends AbstractController
 
         return $this->redirectToRoute('folder_index');
     }
+
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(Request $request, int $id, ManagerRegistry $registry): Response
+    {
+        $folder = $registry->getRepository(Folder::class)->find($id);
+        if (!$folder) {
+            throw $this->createNotFoundException(
+                'Folder with id: ' . $id . ' has not been found!'
+            );
+        }
+
+        $form = $this->createForm(FolderType::class, $folder, [
+            'submit_button_text' => 'save',
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registry->getManager()->flush();
+
+            return $this->redirectToRoute('folder_index');
+        }
+
+        return $this->render('folder/edit.html.twig', [
+            'form' => $form->createView(),
+            'folder' => $folder,
+        ]);
+    }
 }
