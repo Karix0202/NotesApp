@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
+use App\Config\NoteColor;
 use App\Repository\NoteRepository;
-use App\Validator\Color;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -14,29 +15,28 @@ class Note
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[NotBlank]
     #[Length(min: 3)]
-    private $title;
+    private string $title;
 
     #[ORM\Column(type: 'text')]
     #[NotBlank]
     #[Length(min: 20)]
-    private $content;
+    private string $content;
 
     #[ORM\Column(type: 'datetime')]
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'string', length: 255, enumType: NoteColor::class, columnDefinition: NoteColor::class)]
     #[NotBlank]
-    #[Color]
-    private $color;
+    private NoteColor $color;
 
     #[ORM\ManyToOne(targetEntity: Folder::class, inversedBy: 'notes')]
     #[ORM\JoinColumn(nullable: false)]
-    private $folder;
+    private Folder $folder;
 
     public function getId(): ?int
     {
@@ -67,24 +67,24 @@ class Note
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getColor(): ?NoteColor
     {
         return $this->color;
     }
 
-    public function setColor($color): self
+    public function setColor(NoteColor $color): self
     {
         $this->color = $color;
 

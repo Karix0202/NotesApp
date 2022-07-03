@@ -103,3 +103,7 @@ button:focus {
     margin-left: 16px;
     padding: 12px 0 !important;
 }
+
+.note-form > .mb-3 > select {
+    text-transform: lowercase !important;
+}

@@ -1,5 +1,5 @@
 <div class="card h-100">
-    <div class="card-body {% if note.color == 'yellow' %} yellow-card {% elseif note.color == 'red' %} red-card {% elseif note.color == 'blue' %} blue-card {% elseif note.color == 'green' %} green-card {% endif %}">
+    <div class="card-body {% if note.color.value == 'yellow' %} yellow-card {% elseif note.color.value == 'red' %} red-card {% elseif note.color.value == 'blue' %} blue-card {% elseif note.color.value == 'green' %} green-card {% endif %}">
         <h5 class="card-title">{{ note.title }}</h5>
         <p class="card-text">{{ note.content }}</p>
         <a href="{{ path('note_edit', { 'id': note.id }) }}" class="btn note-card-btn edit-link">Edit</a>

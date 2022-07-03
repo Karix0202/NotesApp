@@ -2,12 +2,13 @@
 
 namespace App\Form;
 
+use App\Config\NoteColor;
 use App\Entity\Folder;
 use App\Entity\Note;
 use App\Repository\FolderRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,14 +28,8 @@ class NoteType extends AbstractType
                     ;
                 }
             ])
-            ->add('color', ChoiceType::class, [
-                'choices' => [
-                    'default' => 'default',
-                    'yellow' => 'yellow',
-                    'green' => 'green',
-                    'blue' => 'blue',
-                    'red' => 'red'
-                ]
+            ->add('color', EnumType::class, [
+                'class' => NoteColor::class,
             ])
             ->add($options['submit_button_text'], SubmitType::class)
         ;
@@ -45,7 +40,10 @@ class NoteType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Note::class,
             'csrf_protection' => true,
-            'submit_button_text' => 'add'
+            'submit_button_text' => 'add',
+            'attr' => [
+                'class' => 'note-form',
+            ]
         ]);
     }
 }

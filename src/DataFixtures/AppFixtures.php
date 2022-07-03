@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Config\NoteColor;
 use App\Entity\Folder;
 use App\Entity\Note;
 use DateTime;
@@ -40,7 +41,9 @@ class AppFixtures extends Fixture
                     ->setTitle($this->faker->realText(20))
                     ->setContent($this->faker->realText(120))
                     ->setCreatedAt(new DateTime())
-                    ->setColor($colors[rand(0, count($colors) - 1)])
+                    ->setColor(
+                        NoteColor::cases()[rand(0, count(NoteColor::cases()) - 1)]
+                    )
                     ->setFolder($folder)
                 ;
 
