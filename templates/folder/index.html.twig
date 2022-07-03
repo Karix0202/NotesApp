@@ -3,6 +3,7 @@
 {% block title %}Folders | NotesApp{% endblock %}
 
 {% block container %}
+    <div class="alert alert-warning" role="alert">Warning! Deleting a folder deletes notes in it</div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for folder in folders %}
             <div class="col">
