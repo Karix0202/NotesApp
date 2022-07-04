@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FolderRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,16 +14,16 @@ class Folder
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'datetime')]
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     #[ORM\OneToMany(mappedBy: 'folder', targetEntity: Note::class, cascade: ['remove'])]
-    private $notes;
+    private Collection $notes;
 
     public function __construct()
     {
@@ -34,7 +35,7 @@ class Folder
         return $this->id;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -51,7 +52,7 @@ class Folder
         return $this->notes;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
