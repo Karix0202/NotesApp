@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Edit note | NotesApp {% endblock %}
+
+{% block container %}
+    <h1>Edit note: {{ note.title }}</h1>
+    {{ form(form)}}
+{% endblock %}
