@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
     private const FOLDER_NUM = 5;
     private const NOTE_NUM_PER_FOLDER = 5;
 
-    public Generator $faker;
+    private Generator $faker;
 
     public function __construct()
     {
@@ -25,8 +25,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $colors = ['default', 'green', 'yellow', 'blue', 'red'];
-
         for ($i = 0; $i < self::FOLDER_NUM; $i++) {
             $folder = new Folder();
             $folder
